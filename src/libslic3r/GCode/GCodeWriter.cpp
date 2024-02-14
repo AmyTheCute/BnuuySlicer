@@ -51,6 +51,7 @@ void GCodeWriter::apply_print_config(const PrintConfig &print_config)
         print_config.machine_max_acceleration_extruding.values.front() : 0));
     m_max_travel_acceleration = static_cast<unsigned int>(std::round((use_mach_limits && print_config.machine_limits_usage.value == MachineLimitsUsage::EmitToGCode && supports_separate_travel_acceleration(print_config.gcode_flavor.value)) ?
         print_config.machine_max_acceleration_travel.values.front() : 0));
+    m_decel_ratio = print_config.decel_ratio.value;
 }
 
 void GCodeWriter::set_extruders(std::vector<unsigned int> extruder_ids)
@@ -203,11 +204,16 @@ std::string GCodeWriter::set_acceleration_internal(Acceleration type, unsigned i
         gcode << (separate_travel ? "M202 X" : "M201 X") << acceleration << " Y" << acceleration;
     else if (FLAVOR_IS(gcfRepRapFirmware) || FLAVOR_IS(gcfMarlinFirmware))
         gcode << (separate_travel ? "M204 T" : "M204 P") << acceleration;
-    else
+
+    else if (FLAVOR_IS(gcfKlipper)) {
+        gcode << "SET_VELOCITY_LIMIT ACCEL=" << acceleration;
+        if(m_decel_ratio > 0)
+            gcode << " ACCEL_TO_DECEL=" << std::round(acceleration * (m_decel_ratio / 100));
+    } else
         gcode << "M204 S" << acceleration;
 
     if (this->config.gcode_comments) gcode << " ; adjust acceleration";
-    gcode << "\n";
+        gcode << "\n";
     
     return gcode.str();
 }

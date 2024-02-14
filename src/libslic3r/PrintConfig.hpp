@@ -809,6 +809,7 @@ PRINT_CONFIG_CLASS_DERIVED_DEFINE(
     ((ConfigOptionFloats,             colorprint_heights))
     ((ConfigOptionBools,              cooling))
     ((ConfigOptionFloat,              default_acceleration))
+    ((ConfigOptionPercent,            decel_ratio))
     ((ConfigOptionInts,               disable_fan_first_layers))
     ((ConfigOptionEnum<DraftShield>,  draft_shield))
     ((ConfigOptionFloat,              duplicate_distance))

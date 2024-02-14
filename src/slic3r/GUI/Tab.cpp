@@ -1623,6 +1623,7 @@ void TabPrint::build()
         optgroup->append_single_option_line("first_layer_acceleration_over_raft");
         optgroup->append_single_option_line("travel_acceleration");
         optgroup->append_single_option_line("default_acceleration");
+        optgroup->append_single_option_line("decel_ratio");
 
         optgroup = page->new_optgroup(L("Autospeed (advanced)"));
         optgroup->append_single_option_line("max_print_speed", "max-volumetric-speed_127176");

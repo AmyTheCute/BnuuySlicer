@@ -791,6 +791,17 @@ void PrintConfigDef::init_fff_params()
     def->mode = comExpert;
     def->set_default_value(new ConfigOptionFloat(0));
 
+
+    def = this->add("decel_ratio", coPercent);
+    def->label = L("Decel to aceleration ratio");
+    def->category = L("Speed");
+    def->tooltip = L("Klippers Accel to decel value, expressed as a percentage over Acceleration. Set to zero to disasble.");
+    def->sidetext = L("%");
+    def->min = 0;
+    def->max = 100;
+    def->set_default_value(new ConfigOptionPercent(50));
+
+
     def = this->add("default_filament_profile", coStrings);
     def->label = L("Default filament profile");
     def->tooltip = L("Default filament profile associated with the current printer profile. "

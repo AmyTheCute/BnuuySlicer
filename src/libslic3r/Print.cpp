@@ -97,6 +97,7 @@ bool Print::invalidate_state_by_config_options(const ConfigOptionResolver & /* n
         "colorprint_heights",
         "cooling",
         "default_acceleration",
+        "decel_ratio",
         "deretract_speed",
         "disable_fan_first_layers",
         "duplicate_distance",

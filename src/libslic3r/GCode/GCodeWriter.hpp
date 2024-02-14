@@ -124,6 +124,7 @@ private:
     // If set to zero, the limit is not in action.
     unsigned int    m_max_acceleration;
     unsigned int    m_max_travel_acceleration;
+    double          m_decel_ratio;
 
     unsigned int    m_last_bed_temperature;
     bool            m_last_bed_temperature_reached;
@@ -131,7 +132,8 @@ private:
 
     enum class Acceleration {
         Travel,
-        Print
+        Print,
+        Decel
     };
 
     std::string _retract(double length, double restart_extra, const std::string_view comment);
