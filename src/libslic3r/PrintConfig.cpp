@@ -799,6 +799,7 @@ void PrintConfigDef::init_fff_params()
     def->sidetext = L("%");
     def->min = 0;
     def->max = 100;
+    def->mode = comExpert;
     def->set_default_value(new ConfigOptionPercent(50));
 
 
